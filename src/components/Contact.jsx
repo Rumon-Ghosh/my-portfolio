@@ -62,7 +62,7 @@ export default function Contact() {
       {/* Decorative Elements */}
       <div className="absolute top-0 left-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-30"></div>
-      
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div
           className={`transition-all duration-1000 ${
@@ -70,7 +70,10 @@ export default function Contact() {
           }`}
         >
           <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
-            Get In <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Touch</span>
+            Get In{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Touch
+            </span>
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-4 rounded-full"></div>
           <p className="text-center text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
@@ -89,18 +92,27 @@ export default function Contact() {
               <div
                 key={item.field}
                 className={`bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-10"
                 }`}
                 style={{
                   transitionDelay: `${index * 150}ms`,
                 }}
               >
                 <div className="flex flex-col items-center text-center">
-                  <div
-                    className={`w-20 h-20 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mb-4 shadow-lg transform transition-transform duration-300 hover:rotate-6 hover:scale-110`}
+                  <a
+                    href={item.href}
+                    target={item.field === "email" ? "_self" : "_blank"}
+                    rel="noopener noreferrer"
+                    className="text-gray-600 hover:text-blue-600 break-all transition-colors duration-300 font-medium"
                   >
-                    <Icon className="w-10 h-10 text-white" />
-                  </div>
+                    <div
+                      className={`w-20 h-20 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mb-4 shadow-lg transform transition-transform duration-300 hover:rotate-6 hover:scale-110`}
+                    >
+                      <Icon className="w-10 h-10 text-white" />
+                    </div>
+                  </a>
                   <h3 className="text-xl font-bold text-gray-900 mb-3">
                     {item.label}
                   </h3>

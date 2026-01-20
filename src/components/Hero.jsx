@@ -29,9 +29,6 @@ export default function Hero() {
     { icon: FaFacebook, href: "https://web.facebook.com/rumon13664", label: "Facebook" },
   ];
 
-  const handleResumeDownload = () => {
-    alert("Resume will done soon.")
-  };
 
   return (
     <section
@@ -89,13 +86,12 @@ export default function Hero() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
               }`}
             >
-              <button
-                onClick={handleResumeDownload}
+              <a href="/Rumon-Resume.pdf" download={true}
                 className="group inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 mb-8 shadow-lg hover:shadow-xl hover:scale-105 transform"
               >
                 <FaDownload className="transition-transform duration-300 group-hover:translate-y-1" />
                 Download Resume
-              </button>
+              </a>
             </div>
 
             {/* Social Links */}
