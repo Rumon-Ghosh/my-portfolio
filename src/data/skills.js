@@ -4,11 +4,11 @@ export const skillsData = {
     { name: "JavaScript", level: 76 },
     { name: "HTML/CSS", level: 83 },
     { name: "Tailwind CSS", level: 80 },
-    { name: "Next.js", level: 67 },
   ],
   backend: [
     { name: "Node.js", level: 76 },
     { name: "Express.js", level: 72 },
+    { name: "Next.js", level: 67 },
     { name: "MongoDB", level: 73 },
     { name: "RESTful API", level: 75 },
   ],

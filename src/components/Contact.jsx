@@ -8,10 +8,9 @@ import {
   FaCopy,
   FaCheck,
 } from "react-icons/fa";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 
 export default function Contact() {
-  const [ref, isVisible] = useScrollAnimation({ threshold: 0.2 });
   const [copiedField, setCopiedField] = useState(null);
 
   const contactInfo = {
@@ -33,7 +32,7 @@ export default function Contact() {
       value: contactInfo.email,
       href: `mailto:${contactInfo.email}`,
       field: "email",
-      gradient: "from-blue-500 to-cyan-500",
+      color: "text-blue-500",
     },
     {
       icon: FaPhone,
@@ -41,7 +40,7 @@ export default function Contact() {
       value: contactInfo.phone,
       href: `tel:${contactInfo.phone}`,
       field: "phone",
-      gradient: "from-green-500 to-emerald-500",
+      color: "text-purple-500",
     },
     {
       icon: FaWhatsapp,
@@ -49,105 +48,102 @@ export default function Contact() {
       value: contactInfo.whatsapp,
       href: `https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, "")}`,
       field: "whatsapp",
-      gradient: "from-green-400 to-green-600",
+      color: "text-green-500",
     },
   ];
 
   return (
-    <section
-      id="contact"
-      ref={ref}
-      className="py-20 bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 relative overflow-hidden"
-    >
-      {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-200 rounded-full blur-3xl opacity-30"></div>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div
-          className={`transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+    <section id="contact" className="py-16 md:py-24 bg-background relative overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
-            Get In{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Touch
-            </span>
+          <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+            Get In <span className="text-gradient">Touch</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-4 rounded-full"></div>
-          <p className="text-center text-lg text-gray-600 mb-12 max-w-2xl mx-auto">
-            Feel free to reach out to me through any of the following channels.
-            I'm always open to discussing new projects, creative ideas, or
-            opportunities to be part of your visions.
-          </p>
-        </div>
+          <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {contactItems.map((item, index) => {
-            const Icon = item.icon;
-            const isCopied = copiedField === item.field;
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {contactItems.map((item, index) => {
+              const Icon = item.icon;
+              const isCopied = copiedField === item.field;
 
-            return (
-              <div
-                key={item.field}
-                className={`bg-white rounded-2xl shadow-lg p-6 hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-10"
-                }`}
-                style={{
-                  transitionDelay: `${index * 150}ms`,
-                }}
-              >
-                <div className="flex flex-col items-center text-center">
+              return (
+                <motion.div
+                  key={item.field}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="glass-card p-6 md:p-10 rounded-[40px] border border-white/5 flex flex-col items-center text-center group"
+                >
                   <a
                     href={item.href}
                     target={item.field === "email" ? "_self" : "_blank"}
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-blue-600 break-all transition-colors duration-300 font-medium"
+                    className="text-gray-400 hover:text-white mb-8 transition-colors break-all px-2 font-medium"
                   >
-                    <div
-                      className={`w-20 h-20 bg-gradient-to-br ${item.gradient} rounded-2xl flex items-center justify-center mb-4 shadow-lg transform transition-transform duration-300 hover:rotate-6 hover:scale-110`}
-                    >
-                      <Icon className="w-10 h-10 text-white" />
+                    <div className={`w-20 h-20 rounded-3xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform ${item.color}`}>
+                      <Icon className="text-3xl" />
                     </div>
                   </a>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {item.label}
-                  </h3>
+
+                  <h3 className="text-xl font-bold mb-2 text-white">{item.label}</h3>
                   <a
                     href={item.href}
                     target={item.field === "email" ? "_self" : "_blank"}
-                    rel="noopener noreferrer"
-                    className="text-gray-600 hover:text-blue-600 mb-4 break-all transition-colors duration-300 font-medium"
+                    className="text-gray-400 hover:text-white mb-8 transition-colors break-all px-2 font-medium"
                   >
                     {item.value}
                   </a>
-                  <button
+
+                  <motion.button
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => handleCopy(item.value, item.field)}
-                    className={`inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-300 ${
-                      isCopied
-                        ? "bg-green-100 text-green-700"
-                        : `bg-gradient-to-r ${item.gradient} text-white hover:shadow-lg transform hover:scale-105`
-                    }`}
+                    className={`mt-auto inline-flex items-center gap-2 px-6 py-3 rounded-2xl font-bold transition-all cursor-pointer ${isCopied
+                      ? "bg-green-500 text-white"
+                      : "bg-white/10 text-white hover:bg-white/20"
+                      }`}
                   >
                     {isCopied ? (
                       <>
-                        <FaCheck className="w-4 h-4" />
-                        Copied!
+                        <FaCheck className="text-sm" />
+                        Copied
                       </>
                     ) : (
                       <>
-                        <FaCopy className="w-4 h-4" />
+                        <FaCopy className="text-sm" />
                         Copy
                       </>
                     )}
-                  </button>
-                </div>
-              </div>
-            );
-          })}
+                  </motion.button>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-20 p-8 md:p-12 glass-card rounded-[40px] border border-white/5 text-center"
+          >
+            <h3 className="text-2xl font-bold mb-4">Let's build something amazing together</h3>
+            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
+              I'm currently available for freelance work and full-time opportunities.
+              If you have a project that needs some love, feel free to reach out.
+            </p>
+            <a
+              href={`mailto:${contactInfo.email}`}
+              className="inline-block bg-primary hover:bg-primary/90 text-white px-10 py-4 rounded-2xl font-black transition-all shadow-lg shadow-primary/20"
+            >
+              Start a Conversation
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>

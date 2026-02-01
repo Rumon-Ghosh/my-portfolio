@@ -1,54 +1,67 @@
 export const projects = [
   {
     id: "project-1",
-    name: "ToyTopia",
-    image: "/projects/project-1.png",
+    name: "Care.io",
+    image: "/projects/project-new.png",
     description:
-      "ToyTopia is a unique online marketplace for kids' toys where families can discover and support local toy sellers. Users can browse toys, view details, and share feedback by logging in or signing up.",
+      "Care.io is a home-care giving service website. Where an authenticate user can book a service to take care his/her beloved one at home. After booking a service user will get an email for conformation.",
     techStack: [
-      "React (Vite)",
+      "Next.js",
       "Tailwind CSS",
       "DaisyUI",
       "Firebase",
-      "React Router",
-      "Swiper Slider",
       "React Icons",
+      "Nodemailer"
     ],
-    liveLink: "https://toy-topia-09.web.app/",
-    githubLink: "https://github.com/programming-hero-web-course2/b12-a9-firesheild-Rumon-Ghosh",
+    liveLink: "https://care-io-theta.vercel.app",
+    githubLink: "https://github.com/Rumon-Ghosh/care.io.git",
     challenges:
-      "Organizing toy data in a user-friendly way and implementing secure Firebase authentication while keeping the UI simple for both kids and parents.",
+      "Organizing toy data in a user-friendly way and implementing secure Firebase authentication and use Nodemailer for conformation of a service booking.",
     improvements:
       "Add advanced search and filters, seller analytics, more categories, and localized content to reach more families.",
   },
   {
     id: "project-2",
-    name: "HabitFlow",
-    image: "/projects/project-2.png",
+    name: "MicroEarn",
+    image: "/projects/project-new-2.png",
     description:
-      "HabitFlow is a modern and intuitive habit-tracking web app that helps users build consistency, stay motivated, and achieve their personal goals through daily habits.",
+      "MicroEarn is a professional micro-tasking and earning platform connecting Workers and Buyers through a coin-based economy. It features secure RBAC, a real-time task system, and comprehensive dashboards for all user roles.",
     techStack: [
       "React",
-      "React Router",
+      "Vite",
       "Tailwind CSS",
       "DaisyUI",
-      "Framer Motion",
-      "React Simple Typewriter",
+      "Firebase Auth",
       "Node.js",
       "Express.js",
       "MongoDB",
+      "JWT"
     ],
-    liveLink: "https://habit-tracker-a3358.web.app",
-    githubLink: "https://github.com/Rumon-Ghosh/habit-tracker-client.git",
+    liveLink: "https://micro-task-11a98.web.app",
+    githubLink: "https://github.com/Rumon-Ghosh/micro-task-frontend.git",
+    serverLink: "https://github.com/Rumon-Ghosh/micro-task-backend.git",
+    adminCredentials: {
+      email: "admin@mail.com",
+      password: "admin**"
+    },
+    features: [
+      "Secure Authentication: Firebase Email/Password and Google Login.",
+      "Role-Based Access Control: Distinct Dashboards for Workers, Buyers, and Admins.",
+      "Coin-Based Economy: Earn coins for tasks and spend coins to create tasks.",
+      "Task Management: Create, update, and delete tasks with real-time coin deduction.",
+      "Withdrawal System: Workers can request withdrawals reaching $10 threshold.",
+      "Dashboard Analytics: Visual statistics for Total Earnings, Tasks, and more.",
+      "Security: JWT implemented for secure API communication."
+    ],
     challenges:
-      "Designing a flexible habit model and accurate streak calculation from MongoDB data, while keeping the UI clean and easy to use.",
+      "Implementing a secure, role-based access control system and maintaining a consistent coin-based economy between Buyers and Workers in real-time.",
     improvements:
-      "Add notifications, calendar views, social sharing, and deeper analytics for tracking progress and long-term habit trends.",
+      "Planning to integrate real-time notifications, automated proof verification using AI, and more diverse withdrawal methods for global users.",
   },
   {
     id: "project-3",
     name: "BookCourier",
-    image: "/projects/project-1.png",
+    image: "/projects/project-3.png",
     description:
       "BookCourier is a complete book-ordering platform with role-based dashboards for users, admins, and librarians. Users can browse, search, sort, and order books with secure Stripe payments.",
     techStack: [

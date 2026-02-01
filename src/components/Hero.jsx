@@ -1,150 +1,158 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin, FaTwitter, FaFacebook, FaDownload } from "react-icons/fa";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 import profile from "@/assets/my_profile.png"
 import Image from "next/image";
 
 export default function Hero() {
-  const [ref, isVisible] = useScrollAnimation({ threshold: 0.2 });
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20,
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
   const socialLinks = [
-    { icon: FaGithub, href: "https://github.com/Rumon-Ghosh", label: "GitHub" },
-    { icon: FaLinkedin, href: "https://www.linkedin.com/in/rumonghosh", label: "LinkedIn" },
-    { icon: FaTwitter, href: "https://x.com/RumonGhosh", label: "Twitter" },
-    { icon: FaFacebook, href: "https://web.facebook.com/rumon13664", label: "Facebook" },
+    { icon: FaGithub, href: "https://github.com/Rumon-Ghosh", label: "GitHub", color: "hover:text-white" },
+    { icon: FaLinkedin, href: "https://www.linkedin.com/in/rumonghosh", label: "LinkedIn", color: "hover:text-blue-500" },
+    { icon: FaTwitter, href: "https://x.com/RumonGhosh", label: "Twitter", color: "hover:text-sky-400" },
+    { icon: FaFacebook, href: "https://web.facebook.com/rumon13664", label: "Facebook", color: "hover:text-blue-600" },
   ];
-
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 pt-20 md:pt-24 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center bg-gradient-mesh pt-24 pb-12 md:pt-32 md:pb-20 relative overflow-hidden"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      {/* Dynamic Background Effects */}
+      <div className="absolute inset-0 z-0">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, 50, 0],
+            y: [0, 30, 0]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, -50, 0],
+            y: [0, -30, 0]
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-secondary/20 rounded-full blur-[150px]"
+        />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
-        <div
-          ref={ref}
-          className={`flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-1000 ${
-            isVisible
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          }`}
-        >
-          {/* Left Side - Text Content */}
-          <div className="flex-1 text-center md:text-left">
-            <div
-              className={`transition-all duration-1000 delay-100 ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
-              }`}
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-16">
+          {/* Left Side - Content */}
+          <div className="flex-1 text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
-                Hi, I'm{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent animate-gradient">
-                  Rumon
-                </span>
+              <h2 className="text-primary font-mono tracking-widest mb-4">MERN STACK DEVELOPER</h2>
+              <h1 className="text-6xl lg:text-8xl font-black mb-6 tracking-tighter leading-none">
+                I'm <span className="text-gradient">Rumon</span>
               </h1>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-700 mb-6">
-                <span className="inline-block animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-                  MERN Stack Developer
-                </span>
-              </h2>
-              <p
-                className={`text-lg md:text-xl text-gray-600 mb-8 max-w-2xl transition-all duration-1000 delay-300 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-                }`}
-              >
-                Passionate developer crafting beautiful and functional web
-                applications. I love turning complex problems into simple,
-                elegant solutions.
+              <p className="text-xl text-gray-400 mb-10 max-w-xl leading-relaxed">
+                Turning ideas into <span className="text-white font-medium">high-performance web realities</span>.
+                I specialize in building scalable, user-centric applications with the modern web stack.
               </p>
-            </div>
+            </motion.div>
 
-            {/* Resume Download Button */}
-            <div
-              className={`transition-all duration-1000 delay-500 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-              }`}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-12"
             >
               <a href="/Rumon-Resume.pdf" download={true}
-                className="group inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 mb-8 shadow-lg hover:shadow-xl hover:scale-105 transform"
+                className="group relative flex items-center gap-3 bg-white text-background px-8 py-4 rounded-2xl font-bold transition-all hover:scale-105 active:scale-95"
               >
-                <FaDownload className="transition-transform duration-300 group-hover:translate-y-1" />
-                Download Resume
+                <FaDownload className="text-sm transition-transform group-hover:translate-y-0.5" />
+                Get Resume
               </a>
-            </div>
+              <div className="flex items-center gap-2 glass p-2 rounded-2xl border border-white/5">
+                {socialLinks.map((social, index) => {
+                  const Icon = social.icon;
+                  return (
+                    <motion.a
+                      key={social.label}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.9 }}
+                      className={`w-12 h-12 flex items-center justify-center rounded-xl text-gray-400 transition-colors ${social.color} hover:bg-white/5`}
+                      aria-label={social.label}
+                    >
+                      <Icon className="text-xl" />
+                    </motion.a>
+                  );
+                })}
+              </div>
+            </motion.div>
 
-            {/* Social Links */}
-            <div
-              className={`flex flex-wrap justify-center md:justify-start gap-4 transition-all duration-1000 delay-700 ${
-                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-              }`}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="flex items-center justify-center lg:justify-start gap-8 opacity-50 grayscale hover:grayscale-0 transition-all"
             >
-              {socialLinks.map((social, index) => {
-                const Icon = social.icon;
-                return (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group w-14 h-14 flex items-center justify-center bg-white rounded-full shadow-lg hover:shadow-xl hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 transition-all duration-300 text-gray-700 hover:text-white transform hover:scale-110 hover:-translate-y-1"
-                    aria-label={social.label}
-                    style={{
-                      animationDelay: `${800 + index * 100}ms`,
-                    }}
-                  >
-                    <Icon className="w-6 h-6 transition-transform duration-300 group-hover:rotate-12" />
-                  </a>
-                );
-              })}
-            </div>
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-white">1+</span>
+                <span className="text-xs uppercase tracking-tighter">Year Coding Experience</span>
+              </div>
+              <div className="w-[1px] h-8 bg-white/20" />
+              <div className="flex flex-col">
+                <span className="text-2xl font-bold text-white">15+</span>
+                <span className="text-xs uppercase tracking-tighter">Projects Completed</span>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Right Side - Professional Photo */}
-          <div className="flex-1 flex justify-center md:justify-end">
-            <div
-              className={`relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 transition-all duration-1000 delay-300 ${
-                isVisible
-                  ? "opacity-100 scale-100 rotate-0"
-                  : "opacity-0 scale-90 rotate-12"
-              }`}
-              style={{
-                transform: `translate(${mousePosition.x}px, ${mousePosition.y}px) rotate(0deg)`,
-              }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full blur-3xl opacity-30 animate-pulse"></div>
-              <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl transform transition-transform duration-300 hover:scale-105">
-                <Image 
-                  src={profile} 
-                  alt="Rumon Ghosh Profile" 
+          {/* Right Side - Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, type: "spring" }}
+            className="flex-1 relative"
+          >
+            <div className="relative w-80 h-80 lg:w-[450px] lg:h-[450px] mx-auto">
+              {/* Decorative shapes */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-x-0 inset-y-0 border-2 border-dashed border-white/10 rounded-full"
+              />
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-x-8 inset-y-8 border border-primary/20 rounded-full"
+              />
+
+              <div className="relative w-full h-full rounded-[40px] overflow-hidden border-2 border-white/5 shadow-2xl glass-card">
+                <Image
+                  src={profile}
+                  alt="Rumon Ghosh"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-700 hover:scale-110"
                   priority
                 />
               </div>
+
+              {/* Floating Badge */}
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute -top-4 -right-4 glass px-6 py-4 rounded-3xl border border-white/10 shadow-2xl"
+              >
+                <div className="flex flex-col">
+                  <span className="text-sm text-white font-medium">Available for</span>
+                  <span className="text-white font-bold">Freelance Work</span>
+                </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

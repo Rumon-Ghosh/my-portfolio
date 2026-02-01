@@ -1,17 +1,15 @@
 "use client";
 
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 
 export default function Experience() {
-  const [ref, isVisible] = useScrollAnimation({ threshold: 0.2 });
-  
   const experiences = [
     {
       title: "Full Stack Developer",
       company: "Company Name",
       duration: "2023 - Present",
       description:
-        "Developed and maintained web applications using React and Node.js. Collaborated with cross-functional teams to deliver high-quality software solutions.",
+        "Developing and maintaining web applications using React and Node.js. Collaborating with cross-functional teams to deliver high-quality software solutions.",
       responsibilities: [
         "Built responsive user interfaces using React",
         "Developed RESTful APIs using Node.js and Express",
@@ -22,82 +20,58 @@ export default function Experience() {
   ];
 
   return (
-    <section
-      id="experience"
-      ref={ref}
-      className="py-20 bg-gradient-to-br from-gray-50 to-purple-50 relative overflow-hidden"
-    >
-      {/* Decorative Elements */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-purple-200 rounded-full blur-3xl opacity-30"></div>
-      <div className="absolute bottom-0 left-0 w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div
-          className={`transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
+    <section id="experience" className="py-24 bg-background relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Experience</span>
+          <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+            Work <span className="text-gradient">Experience</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto mb-12 rounded-full"></div>
-        </div>
+          <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
+        </motion.div>
 
-        <div className="max-w-4xl mx-auto space-y-8">
-          {experiences.length > 0 ? (
-            experiences.map((exp, index) => (
-              <div
-                key={index}
-                className={`bg-white rounded-2xl shadow-lg p-6 md:p-8 hover:shadow-2xl transition-all duration-500 transform hover:scale-[1.02] relative overflow-hidden ${
-                  isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
-                }`}
-                style={{
-                  transitionDelay: `${index * 200}ms`,
-                }}
-              >
-                {/* Decorative gradient bar */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500"></div>
-                
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4 pt-4">
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                      {exp.title}
-                    </h3>
-                    <p className="text-xl text-purple-600 font-semibold mb-2">
-                      {exp.company}
-                    </p>
-                  </div>
-                  <span className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold px-5 py-2 rounded-full shadow-md mt-2 md:mt-0">
-                    {exp.duration}
-                  </span>
-                </div>
-                <p className="text-gray-700 leading-relaxed mb-4 text-lg">
-                  {exp.description}
-                </p>
-                {exp.responsibilities && exp.responsibilities.length > 0 && (
-                  <ul className="space-y-2">
-                    {exp.responsibilities.map((resp, idx) => (
-                      <li
-                        key={idx}
-                        className="flex items-start gap-3 text-gray-700"
-                      >
-                        <span className="mt-2 w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex-shrink-0"></span>
-                        <span>{resp}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))
-          ) : (
-            <div
-              className={`text-center text-gray-500 py-12 bg-white rounded-2xl shadow-lg transition-all duration-1000 ${
-                isVisible ? "opacity-100" : "opacity-0"
-              }`}
+        <div className="max-w-4xl mx-auto space-y-12">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="glass-card p-10 rounded-[40px] border border-white/5 relative group"
             >
-              <p>Professional experience will be added here when available.</p>
-            </div>
-          )}
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
+                <div>
+                  <h3 className="text-3xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                    {exp.title}
+                  </h3>
+                  <p className="text-xl text-secondary font-medium">{exp.company}</p>
+                </div>
+                <div className="px-6 py-2 rounded-2xl bg-primary/10 border border-primary/20 text-primary font-bold whitespace-nowrap">
+                  {exp.duration}
+                </div>
+              </div>
+
+              <p className="text-lg text-gray-400 leading-relaxed mb-8">
+                {exp.description}
+              </p>
+
+              {exp.responsibilities && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {exp.responsibilities.map((resp, idx) => (
+                    <div key={idx} className="flex items-center gap-3 p-4 rounded-2xl bg-white/5 border border-white/5">
+                      <div className="w-2 h-2 rounded-full bg-primary" />
+                      <span className="text-sm text-gray-300 font-medium">{resp}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

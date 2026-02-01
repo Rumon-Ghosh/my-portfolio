@@ -1,139 +1,100 @@
 "use client";
 
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 import { FaUser, FaCode, FaRocket, FaFutbol, FaBullseye } from "react-icons/fa";
 
 export default function About() {
-  const [ref, isVisible] = useScrollAnimation({ threshold: 0.2 });
+  const points = [
+    {
+      icon: FaUser,
+      color: "text-blue-500",
+      content: (
+        <>
+          I'm <span className="text-white font-semibold">Rumon Ghosh</span>, a web developer passionate about building modern, scalable web applications with a strong focus on clean code, performance, and user experience.
+        </>
+      ),
+    },
+    {
+      icon: FaRocket,
+      color: "text-purple-500",
+      content: (
+        <>
+          My journey began with self-exploration of HTML, CSS, and JavaScript. Later, I joined <span className="text-white font-semibold">Programming Hero</span>, which provided the structured learning and project experience needed to build professional applications.
+        </>
+      ),
+    },
+    {
+      icon: FaCode,
+      color: "text-green-500",
+      content: (
+        <>
+          I specialize in the <span className="text-white font-semibold">MERN stack</span> (MongoDB, Express, React, Node.js). I focus on creating responsive interfaces and efficient backend logic using tools like Firebase, Git, and REST APIs.
+        </>
+      ),
+    },
+    {
+      icon: FaFutbol,
+      color: "text-orange-500",
+      content: (
+        <>
+          Beyond coding, I'm a <span className="text-white font-semibold">football enthusiast</span> and an avid traveler. These passions help me stay balanced and bring fresh perspectives to my creative process.
+        </>
+      ),
+    },
+    {
+      icon: FaBullseye,
+      color: "text-red-500",
+      content: (
+        <>
+          My goal is to evolve into a <span className="text-white font-semibold">world-class full-stack developer</span>, contributing to impactful open-source projects and delivering production-ready solutions that solve real-world problems.
+        </>
+      ),
+    },
+  ];
 
   return (
-    <section
-      id="about"
-      ref={ref}
-      className="py-20 bg-white relative overflow-hidden"
-    >
-      {/* Decorative Background */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-100 to-purple-100 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/2"></div>
+    <section id="about" className="py-16 md:py-24 bg-background relative overflow-hidden">
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">
+            About <span className="text-gradient">Me</span>
+          </h2>
+          <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
+        </motion.div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-4xl mx-auto">
-          {/* Heading */}
-          <div
-            className={`transition-all duration-1000 ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="grid gap-4 md:gap-8"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
-              About{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Me
-              </span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-12 rounded-full"></div>
-          </div>
-
-          {/* Single Article Card (one column, full story) */}
-          <article
-            className={`bg-white rounded-2xl shadow-xl p-8 md:p-10 lg:p-12 transition-all duration-1000 delay-200 hover:shadow-2xl transform hover:scale-[1.01] border border-gray-100 ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
-          >
-            <div className="space-y-8">
-              <div className="flex items-start space-x-4">
-                <FaUser className="text-blue-600 text-2xl mt-1 flex-shrink-0" />
-                <p className="text-lg md:text-xl leading-relaxed text-gray-700 font-medium">
-                  I&apos;m{" "}
-                  <span className="font-semibold text-gray-900">
-                    Rumon Ghosh
-                  </span>
-                  , a web developer who loves building modern, scalable web
-                  applications with a strong focus on clean code, performance,
-                  and user experience. I enjoy solving complex problems and
-                  turning ideas into real-world solutions while always trying to
-                  keep things simple and user-friendly.
-                </p>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <FaRocket className="text-purple-600 text-2xl mt-1 flex-shrink-0" />
-                <p className="text-lg leading-relaxed text-gray-700">
-                  My programming journey started by myself, exploring the basics
-                  of HTML, CSS and JavaScript out of curiosity. After that, I
-                  decided to join{" "}
-                  <span className="font-semibold text-gray-900">
-                    Programming Hero
-                  </span>
-                  , where I got real experience through structured learning,
-                  assignments, and full projects. That experience helped me
-                  understand how to build complete applications from scratch and
-                  think like a real-world developer.
-                </p>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <FaCode className="text-green-600 text-2xl mt-1 flex-shrink-0" />
-                <p className="text-lg leading-relaxed text-gray-700">
-                  On the frontend, I work with{" "}
-                  <span className="font-semibold text-gray-900">
-                    HTML, CSS, JavaScript, React JS and Firebase
-                  </span>{" "}
-                  to create responsive, user-friendly interfaces. On the
-                  backend, I use{" "}
-                  <span className="font-semibold text-gray-900">
-                    Node.js, REST APIs, MongoDB
-                  </span>{" "}
-                  to build efficient and reliable application logic. I regularly
-                  use{" "}
-                  <span className="font-semibold text-gray-900">
-                    Git, GitHub
-                  </span>{" "}
-                  for version control and collaboration, I always try to write
-                  reusable, maintainable code that is easy to grow and improve.
-                </p>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <FaFutbol className="text-orange-600 text-2xl mt-1 flex-shrink-0" />
-                <p className="text-lg leading-relaxed text-gray-700">
-                  Outside of programming, I enjoy{" "}
-                  <span className="font-semibold text-gray-900">
-                    watching live football matches
-                  </span>{" "}
-                  and{" "}
-                  <span className="font-semibold text-gray-900">
-                    travelling
-                  </span>
-                  . These interests help me relax, get new perspectives, and
-                  come back to my work with fresh ideas and more creativity.
-                </p>
-              </div>
-
-              <div className="flex items-start space-x-4">
-                <FaBullseye className="text-red-600 text-2xl mt-1 flex-shrink-0" />
-                <p className="text-lg leading-relaxed text-gray-700">
-                  My goals are to grow as a{" "}
-                  <span className="font-semibold text-gray-900">
-                    full-stack developer
-                  </span>
-                  , build{" "}
-                  <span className="font-semibold text-gray-900">
-                    production-ready applications
-                  </span>
-                  , and actively{" "}
-                  <span className="font-semibold text-gray-900">
-                    contribute to open-source projects
-                  </span>
-                  . I&apos;m always exploring new tools and best practices to
-                  become a better developer and deliver more value through my
-                  work.
-                </p>
-              </div>
-            </div>
-          </article>
+            {points.map((point, index) => {
+              const Icon = point.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="glass-card p-6 md:p-8 rounded-3xl flex items-start gap-6 group hover:border-primary/20"
+                >
+                  <div className={`p-4 rounded-2xl bg-white/5 ${point.color} group-hover:scale-110 transition-transform`}>
+                    <Icon className="text-2xl" />
+                  </div>
+                  <p className="text-lg text-gray-400 leading-relaxed pt-1">
+                    {point.content}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
         </div>
       </div>
     </section>
