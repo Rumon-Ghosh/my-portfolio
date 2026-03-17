@@ -148,7 +148,7 @@ export default function Hero() {
               >
                 <div className="flex flex-col">
                   <span className="text-sm text-white font-medium">Available for</span>
-                  <span className="text-white font-bold">Freelance Work</span>
+                  <span className="text-white font-bold">Join A Team</span>
                 </div>
               </motion.div>
             </div>
